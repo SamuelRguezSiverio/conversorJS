@@ -22,45 +22,46 @@ const App = () => {
   const convertTextToObject = () => {
     try {
       // Asegúrate de que cada pregunta esté separada por un salto de línea y comience con un número seguido de un punto.
-      const rawQuestions = inputText.trim().split(/\n(?=\d+\.)/)
+      const rawQuestions = inputText.trim().split(/\n(?=\d+\.)/);
       if (rawQuestions.length === 0) {
-        throw new Error('No se detectaron preguntas en el formato esperado.')
+        throw new Error('No se detectaron preguntas en el formato esperado.');
       }
-
+  
       const questionsArray = rawQuestions.map((rawQuestion, index) => {
         // Divide la pregunta de las respuestas y de la respuesta correcta.
         const questionWithoutNumber = rawQuestion.replace(/^\d+\.\s*/, '');
-        const parts = questionWithoutNumber.split(/\nRespuesta Correcta:/)
+        const parts = questionWithoutNumber.split(/\nRespuesta Correcta:/);
         if (parts.length < 2) {
           throw new Error(
             `Error en la pregunta ${
               index + 1
             }: no se encuentra la respuesta correcta.`
-          )
+          );
         }
-        const questionParts = parts[0].split(/\n[ABCD]\)/)
-        const questionText = questionParts[0].trim()
-        const answers = questionParts.slice(1)
-        const correctAnswerLetter = parts[1].trim()
-
+        // Modifica la siguiente línea para aceptar respuestas con puntos o paréntesis.
+        const questionParts = parts[0].split(/\n[ABCD][\).]/);
+        const questionText = questionParts[0].trim();
+        const answers = questionParts.slice(1);
+        const correctAnswerLetter = parts[1].trim();
+  
         // Encuentra la respuesta correcta basada en la letra proporcionada.
         const correctAnswerIndex = ['A', 'B', 'C', 'D'].indexOf(
           correctAnswerLetter
-        )
+        );
         if (correctAnswerIndex === -1 || !answers[correctAnswerIndex]) {
           throw new Error(
             `Error en la pregunta ${
               index + 1
             }: letra de respuesta correcta inválida o no encontrada.`
-          )
+          );
         }
-        const correctAnswer = answers[correctAnswerIndex].trim()
-
+        const correctAnswer = answers[correctAnswerIndex].trim();
+  
         // Filtra las respuestas incorrectas.
         const incorrectAnswers = answers
           .filter((_, index) => index !== correctAnswerIndex)
-          .map((answer) => answer.trim())
-
+          .map((answer) => answer.trim());
+  
         return {
           id: String(index + 1),
           question: questionText,
@@ -68,15 +69,16 @@ const App = () => {
           category: category,
           correct_answer: correctAnswer,
           incorrect_answers: incorrectAnswers,
-        }
-      })
-
-      setOutputObject(questionsArray)
+        };
+      });
+  
+      setOutputObject(questionsArray);
     } catch (error) {
       // Si hay un error, muestra un alerta con el mensaje de error
-      alert(`Se encontró un error: ${error.message}`)
+      alert(`Se encontró un error: ${error.message}`);
     }
-  }
+  };
+  
 
   const copyToClipboard = async () => {
     try {
