@@ -1,0 +1,115 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #b5b3b3;
+}
+
+#root {
+  width: 100%;
+  max-width: 1200px; /* O el ancho máximo que prefieras para tu aplicación */
+}
+
+h1 {
+  color: rgb(255, 255, 255);
+}
+/* Estilos del contenedor principal */
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Estilos del contenedor de columnas */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Estilos de las columnas individuales */
+.column {
+  flex: 1;
+  min-width: 300px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Estilos de los inputs y textarea */
+input[type='text'],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Estilos del botón */
+button {
+  background-color: #5c6bc0;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #3f51b5;
+}
+
+/* Estilos para el pre */
+pre {
+  width: 90%;
+  max-width: 800px; /* Ajusta esto al ancho deseado */
+  margin: 0 auto; /* Esto centrará el elemento pre horizontalmente */
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 10px;
+  overflow: auto;
+  border-radius: 4px;
+  color: black;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+.scrollButton {
+  position: fixed;
+  right: 20px;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  width: 48px;
+  border-radius: 50%; /* Botones circulares */
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 24px; /* Tamaño de la flecha */
+}
+
+.scrollButton.top {
+  bottom: 80px;
+}
+
+.scrollButton.bottom {
+  bottom: 20px;
+}
